@@ -13,17 +13,14 @@ _start:
   adr   x0, el2_vector_table
   msr   vbar_el2, x0
 
-  // Enable SMC Trap
-  mrs   x0, hcr_el2
+  // Set Hypervisor Config
+  mov   x0, xzr
   orr   x0, x0, #(1 << 19)
+  orr   x0, x0, #(1 << 31)
   msr   hcr_el2, x0
 
   // Apply Changes
   isb
-
-  // Finish EL2 Setup
-  mov   x0, xzr
-  msr   vttbr_el2, x0
 
   // Return to EL1
   ldr   x0, =0xC2000401
