@@ -18,7 +18,9 @@ SECTIONS
     }
 
     . = ALIGN(16);
-    __stack_bottom = .;
-    . += 0x4000;
-    __stack_top = .;
+    .stack : {
+        __stack_bottom = .;
+        . += 0x4000;
+        __stack_top = .;
+    }
 }
