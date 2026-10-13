@@ -35,4 +35,39 @@
 #define PSCI_DISABLED             -8
 #define PSCI_INVALID_ADDRESS      -9
 
+uint32_t
+psci_version (void);
+
+int64_t
+psci_cpu_suspend (
+  uint32_t power_state,
+  uint64_t entry_point_address,
+  uint64_t context_id
+  );
+
+int32_t
+psci_cpu_off (void);
+
+int64_t
+psci_cpu_on (
+  uint64_t target_cpu,
+  uint64_t entry_point_address,
+  uint64_t context_id
+  );
+
+int64_t
+psci_affinity_info (
+  uint64_t target_affinity,
+  uint32_t lowest_affinity_level
+  );
+
+void
+psci_system_off (void);
+
+void
+psci_system_reset (void);
+
+int32_t
+psci_features (uint32_t psci_func_id);
+
 #endif /* _PSCI_H_ */

@@ -2,22 +2,28 @@
 
 ## What is this?
 
-This is a Custom Hypervisor Implementation for the S5E9810. <br>
-It's Goal is to Implement a Compliant PSCI v1.1 Interface on top of the Existing v0.1 Interface.
+This is a Custom Hypervisor Implementation for Exynos Devices. <br>
+It's Goal is to Implement Workarounds for SoC Quirks.
 
-## Reason
+## Supported SoCs
 
-The EL3 Monitor of the S5E9810 Implements a very Old PSCI Version which is not Compatible with Windows. <br>
-The `CPU_ON` PSCI Function also lacks the Code to Handle the `context_id` Parameter, Leading it to be unused.
+- Exynos 9810 (S5E9810)
+
+## Components
+
+| Feature   | Notes                  | State |
+|:----------|:-----------------------|:-----:|
+| PSCI v1.1 | Minimal Implementation | ✅    |
 
 ## Compilation
 
 To Compile this Hypervisor, Simply run these 2 Commands:
 ```bash
-make clean
-make
+make TARGET=[SOC_INTERNAL_NAME] clean
+make TARGET=[SOC_INTERNAL_NAME]
 ```
-A new File called `hyp.bin` will show up, Which is the File you'll use in the UEFI Firmware.
+`SOC_INTERNAL_NAME` is the Internal Name of the Exynos SoC, Building Exynos 9810 for Example would be `s5e9810`.
+A new File called `hyp.bin` will show up after the Build, Which is the File you'll use in the UEFI Firmware.
 
 ## Credits
 

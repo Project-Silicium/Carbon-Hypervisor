@@ -1,4 +1,4 @@
-.global call_smc_el3
+.global el3_call_smc
 
 .text
 .align 3
@@ -6,6 +6,6 @@
 //
 // EL3 Monitor SMC Call
 //
-call_smc_el3:
+el3_call_smc:
   smc   #0
   ret

@@ -22,8 +22,12 @@ _start:
   // Apply Changes
   isb
 
+  // Enter C Code Entry Point
+  bl    main
+
   // Return to EL1
-  ldr   x0, =0xC2000401
+  mov   x0, 0x0401
+  movk  x0, 0xC200, LSL 16
   mov   x1, xzr
   smc   #0
 
@@ -91,9 +95,9 @@ exception_smc_hook:
   cmp   x16, #0x17
   b.ne  unhandled_exception
 
-  // Execute PSCI Handler
+  // Execute SMC Handler
   mov   x0, sp
-  bl    psci_handler
+  bl    smc_handler
 
   // Verify Return Value
   cbnz  x0, smc_passthru
