@@ -22,7 +22,7 @@ To Compile this Hypervisor, Simply run these 2 Commands:
 make TARGET=[SOC_INTERNAL_NAME] clean
 make TARGET=[SOC_INTERNAL_NAME]
 ```
-`SOC_INTERNAL_NAME` is the Internal Name of the Exynos SoC, Building Exynos 9810 for Example would be `s5e9810`.
+`SOC_INTERNAL_NAME` is the Internal Name of the Exynos SoC, Building Exynos 9810 for Example would be `s5e9810`. <br>
 A new File called `hyp.bin` will show up after the Build, Which is the File you'll use in the UEFI Firmware.
 
 ## Credits
