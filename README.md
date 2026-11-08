@@ -8,6 +8,7 @@ It's Goal is to Implement Workarounds for SoC Quirks.
 ## Supported SoCs
 
 - Exynos 9810 (S5E9810)
+- Exynos 7885 (S5E7885)
 
 ## Components
 
