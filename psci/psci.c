@@ -37,19 +37,22 @@ static inline
 uint8_t
 get_core_index (uint64_t mpidr)
 {
-  // Get Cluster & Core ID
-  uint32_t aff1 = (mpidr >> 8) & 0xFF;
-  uint32_t aff0 = mpidr & 0xFF;
+  uint64_t *core_mpidr = (void *)0;
+  uint8_t   core_count = 0;
 
-  // Return Core Number
-  if (aff1 == 0x00 && aff0 < 4) {
-    return aff0;
-  } else if (aff1 == 0x01 && aff0 < 4) {
-    return 4 + aff0;
+  // Get Platform Core MPIDRs
+  platform_get_mpidr (&core_mpidr, &core_count);
+
+  // Go thru each Core MPIDR
+  for (uint64_t i = 0; i < core_count; i++) {
+    // Compare MPIDRs
+    if (mpidr == core_mpidr[i]) {
+      return i;
+    }
   }
 
-  // Invalid MPIDR
-  return -1;
+  // No Match Found
+  return 0xFF;
 }
 
 int64_t
@@ -62,7 +65,7 @@ psci_cpu_on (
   uint8_t core_index = get_core_index (target_cpu);
 
   // Verify Core Index
-  if (core_index >= 8) {
+  if (core_index == 0xFF) {
     return PSCI_INVALID_PARAMETERS;
   }
 
